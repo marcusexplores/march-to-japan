@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { env } from "./src/utilities/env";
+import { env } from "@/src/common/utilities/env";
 
 const nextConfig: NextConfig = {
   basePath: env.publicBasePath,
