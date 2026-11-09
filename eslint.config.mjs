@@ -1,0 +1,136 @@
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+  ]),
+  {
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+    },
+    rules: {
+      'simple-import-sort/imports': [
+        'error', // severity level
+        {
+          // Each array represents a group of imports that should be sorted together
+          // Each group is separated by a blank line, but since in the project only uses 1 array, there will be no blank line in-between imports
+          // The order of the arrays represents the order of the groups.
+          groups: [
+            [
+              '^\\u0000', // 1. Side effect imports (e.g., import './polyfill';)
+              '^react$', // 2. React core framework modules
+              '^next', // 3. Next.js framework modules
+              '^@?\\w', // 4. Third-party external npm packages (node_modules)
+              '^@/src', // 5. Absolute project path mapping alias
+              '^\\.\\.(?!/?$)', // 6. Nested parent folder imports (e.g., ../components/X)
+              '^\\.\\./?$', // 7. Direct parent index file imports (e.g., ../ or ..)
+              '^\\./(?=.*/)(?!/?$)', // 8. Nested local sub-folder imports (e.g., ./components/X, ./utils/X)
+              '^\\./[A-Z][^/]*$', // 9. Direct sibling files starting with Caps (e.g., ./DonutCenterDisplay)
+              '^\\./types(\\.|/|$)', // 10. Direct sibling types file (e.g., ./types)
+              '^\\./(?!(types)(\\.|/|$))[a-z][^/]*$', // 11. Direct sibling files starting with lowercase (e.g., ./constants, ./utils)
+              '^\\./?$', // 12. Current folder index file imports (e.g., ./ or .)
+              '^.+\\.s?css$', // 13. Cascading Style Sheets (CSS/SCSS) files
+              '^@/public', // 14. Static asset path mapping aliases (images/vectors)
+            ],
+          ],
+        },
+      ],
+      'simple-import-sort/exports': 'error',
+    },
+  },
+  // 1. Layer: src/common (Must be pure & domain-agnostic)
+  {
+    files: ['src/common/**/*.{js,jsx,ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@/data/*', '@/repositories/*', '@/domains/*', '@/app/*'],
+              message:
+                'Layer Violation: `src/common` must be pure and domain-agnostic. It cannot import from any other layer.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  // 2. Layer: src/data (Raw static assets & constants only)
+  {
+    files: ['src/data/**/*.{js,jsx,ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@/repositories/*', '@/domains/*', '@/app/*'],
+              message:
+                'Layer Violation: `src/data` contains raw static constants only and cannot import from upper layers.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  // 3. Layer: src/repositories (Data parsers & fetchers)
+  {
+    files: ['src/repositories/**/*.{js,jsx,ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@/domains/*', '@/app/*'],
+              message:
+                'Layer Violation: `src/repositories` can only import from `data/` or `common/`. UI layers are forbidden.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  // 4. Layer: src/domains (Business domain screens & workflows)
+  {
+    files: ['src/domains/**/*.{js,jsx,ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@/app/*'],
+              message:
+                'Layer Violation: `src/domains` cannot import from the Next.js `app/` routing layer.',
+            },
+            {
+              group: ['@/domains/*/*'],
+              message:
+                'Cross-Domain Violation: Domains cannot import directly from other domains. Move shared UI to `@/common` or shared data to `@/repositories`.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  eslintConfigPrettier,
+]);
+
+export default eslintConfig;
