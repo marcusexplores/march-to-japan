@@ -158,7 +158,3 @@ export const navRoutes = [
     icon: GoChecklist,
   },
 ] as const satisfies NavRoute[];
-
-export const itineraryNavRoutes = Object.values(routes.itinerary).map(
-  (day) => day.root,
-);

@@ -1,0 +1,47 @@
+export const ItineraryDay0 = () => {
+  return (
+    <div>
+      ItineraryDay0
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+      <div>a</div>
+    </div>
+  );
+};

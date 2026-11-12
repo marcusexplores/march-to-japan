@@ -1,26 +1,42 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-surface: oklch(0.9521 0 0);
+  /* --color-on-surface: oklch(0.273 0.056 241); */
+
+  --color-border: oklch(0.7875 0.1183 336.52);
+
+  /* Muted — TODO */
+  --color-muted: oklch(0.948 0.027 194);
+  --color-on-muted: oklch(0.273 0.056 241);
+
+  /* Accent — Dango Pink */
+  --color-accent: oklch(0.8613 0.0584 331.54);
+  /* --color-on-accent: oklch(20.46% 0 0); */
+
+  /* Active — Dango Pink */
+  --color-active: oklch(0.7875 0.1183 336.52);
+  /* --color-on-active: oklch(20.46% 0 0); */
+
+  /* Success — Dango Green */
+  --color-success: oklch(0.8014 0.1443 140.87);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: oklch(0.9521 0 0);
+  color: oklch(20.46% 0 0);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Dango Color Palette
+Dark Pink:   #ea9cd6	rgb(234, 156, 214)		oklch(0.7875 0.1183 336.52)
+Light Pink:  #e9c4e3	rgb(233, 196, 227)		oklch(0.8613 0.0584 331.54)
+White:       #efefef	rgb(239, 239, 239)		oklch(0.9521 0.0000 0.00)
+Light Green: #bfe1b4	rgb(191, 225, 180)		oklch(0.8733 0.0706 138.09)
+Dark Green:  #88d57b	rgb(136, 213, 123)		oklch(0.8014 0.1443 140.87)
+ */
