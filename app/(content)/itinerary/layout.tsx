@@ -3,7 +3,17 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Tab, TabList, Tabs } from 'react-aria-components';
+import {
+  Focusable,
+  Popover,
+  PreviewTrigger,
+  Tab,
+  TabList,
+  Tabs,
+  Tooltip,
+  TooltipTrigger,
+} from 'react-aria-components';
+import { TooltipPopover } from '@/src/common/components/popover/TooltipPopover';
 import { itineraryRoutes } from '@/src/domains/itinerary';
 
 interface ItineraryLayoutProps {
@@ -34,8 +44,14 @@ export default function ItineraryLayout({ children }: ItineraryLayoutProps) {
                 )
               }
             >
-              <div>{item.name}</div>
-              {/* <small>{item.date}</small> */}
+              <PreviewTrigger delay={0} closeDelay={100}>
+                <Focusable>
+                  <div>{item.name}</div>
+                </Focusable>
+                <TooltipPopover>
+                  <small>{item.date}</small>
+                </TooltipPopover>
+              </PreviewTrigger>
             </Tab>
           )}
         </TabList>
