@@ -14,7 +14,7 @@ import {
   TooltipTrigger,
 } from 'react-aria-components';
 import { TooltipPopover } from '@/src/common/components/popover/TooltipPopover';
-import { itineraryRoutes } from '@/src/domains/itinerary';
+import { itineraryDays } from '@/src/domains/itinerary';
 
 interface ItineraryLayoutProps {
   children: ReactNode;
@@ -23,13 +23,15 @@ interface ItineraryLayoutProps {
 export default function ItineraryLayout({ children }: ItineraryLayoutProps) {
   const pathname = usePathname();
 
+  const activeRoute = itineraryDays.find((item) => item.path === pathname);
+
   return (
     <div className="flex h-full flex-col">
       <Tabs selectedKey={pathname}>
         <TabList
           aria-label="Itinerary Days"
-          items={itineraryRoutes}
-          className="flex w-full scrollbar-none overflow-x-auto py-2 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          items={itineraryDays}
+          className="flex flex-col"
         >
           {(item) => (
             <Tab

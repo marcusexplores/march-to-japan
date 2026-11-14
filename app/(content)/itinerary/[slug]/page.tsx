@@ -1,9 +1,10 @@
 import { notFound } from 'next/navigation';
-import { itineraryRoutes } from '@/src/domains/itinerary';
+import { itineraryDays } from '@/src/domains/itinerary';
+import { ItineraryDay } from '@/src/domains/itinerary/itineraryDay';
 
 export const generateStaticParams = () => {
-  return itineraryRoutes.map((route) => ({
-    slug: route.path.replace('/itinerary/', ''), // extracts 'day-0', 'day-1', etc.
+  return itineraryDays.map((day) => ({
+    slug: day.route.replace('/itinerary/', ''), // extracts 'day-0', 'day-1', etc.
   }));
 };
 
@@ -15,15 +16,13 @@ export default async function ItineraryDayPage({
   params,
 }: ItineraryDayPageProps) {
   const { slug } = await params;
-  const currentRoute = itineraryRoutes.find(
-    (route) => route.path === `/itinerary/${slug}`,
+  const currentDay = itineraryDays.find(
+    (day) => day.route === `/itinerary/${slug}`,
   );
 
-  if (!currentRoute) {
+  if (!currentDay) {
     notFound();
   }
 
-  const ItineraryDay = currentRoute.component;
-
-  return <ItineraryDay />;
+  return <ItineraryDay activities={currentDay.activities} />;
 }
