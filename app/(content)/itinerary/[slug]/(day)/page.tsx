@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
-import { itineraryDays } from '@/src/domains/itinerary';
-import { ItineraryDay } from '@/src/domains/itinerary/ItineraryDay';
+import { ItineraryDay, itineraryDays } from '@/src/domains/itinerary';
 
 export const generateStaticParams = () => {
   return itineraryDays.map((day) => ({
