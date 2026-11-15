@@ -24,6 +24,7 @@ export const ActivityMap = ({ map }: ActivityMapProps) => {
         <ModalOverlay
           isDismissable
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
         >
           <Modal className="bg-surface w-full max-w-7xl overflow-hidden rounded-lg shadow-xl">
             <Dialog className="outline-none">
