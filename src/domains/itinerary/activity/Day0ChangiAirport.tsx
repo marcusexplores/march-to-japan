@@ -1,13 +1,12 @@
 'use client';
 
-import { Image } from '@/src/common/components';
-import { PageSection } from '@/src/common/components/layout/PageSection';
+import { Image, PageSection } from '@/src/common/components';
 import { ActivityContainer } from './ActivityContainer';
 import luggageImage from '@/public/images/day-0-luggage.jpg';
 import familyImage from '@/public/images/day-0-shiseido-forest.jpg';
 import friendImage from '@/public/images/day-0-sour-bombe.jpg';
 
-export const Day1ChangiAirport = () => {
+export const Day0ChangiAirport = () => {
   return (
     <ActivityContainer
       title="Changi Airport"
@@ -44,6 +43,7 @@ export const Day1ChangiAirport = () => {
         <Image
           src={luggageImage}
           alt="Luggages with tags"
+          loading="eager"
           classNames={{ image: 'sm:w-3/4 lg:w-1/2' }}
         />
       </PageSection>

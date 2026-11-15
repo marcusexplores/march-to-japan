@@ -1,6 +1,6 @@
 import { ComponentType } from 'react';
 import { routes } from '@/src/common/utilities/routes';
-import { Day1ChangiAirport } from '../activity';
+import { Day0ChangiAirport, Day0ChangiLounge } from '../activity';
 
 export interface ItineraryActivity {
   name: string;
@@ -28,13 +28,14 @@ export const itineraryDays = [
         description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
         time: '19:00',
         route: routes.itinerary.day0.airport,
-        component: Day1ChangiAirport,
+        component: Day0ChangiAirport,
       },
       {
-        name: 'Lounge',
+        name: 'Changi Lounge',
         description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum.',
         time: '20:30',
         route: routes.itinerary.day0.lounge,
+        component: Day0ChangiLounge,
       },
       {
         name: 'Departure',
