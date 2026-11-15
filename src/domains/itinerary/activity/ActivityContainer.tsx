@@ -38,7 +38,7 @@ export const ActivityContainer = ({
         </Button>
       </PageSection>
       <PageSection classNames={{ content: 'flex items-center justify-center' }}>
-        <p className="text-xl">{title}</p>
+        <p className="text-3xl">{title}</p>
       </PageSection>
       <ActivityMetaSection
         addressEn={location?.addressEn}
@@ -47,6 +47,15 @@ export const ActivityContainer = ({
         website={website}
       />
       {children}
+      <PageSection classNames={{ content: 'flex' }}>
+        <Button
+          onPress={() => router.back()}
+          className="inline-flex cursor-pointer items-center gap-1"
+        >
+          <BiLeftArrowAlt />
+          <span>Back</span>
+        </Button>
+      </PageSection>
     </Page>
   );
 };

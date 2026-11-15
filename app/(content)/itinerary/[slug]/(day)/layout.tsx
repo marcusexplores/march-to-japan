@@ -32,8 +32,7 @@ export default function ItineraryLayout({ children }: ItineraryLayoutProps) {
             if (key) router.push(String(key));
           }}
         >
-          {/* Trigger Button showing the currently selected item */}
-          <Button className="hover:bg-accent flex items-center justify-between gap-2 rounded-full border px-4 py-2 text-left">
+          <Button className="flex cursor-pointer items-center justify-between gap-2 rounded-full border px-4 py-2 text-left">
             <SelectValue>
               {({ selectedText, defaultChildren }) =>
                 selectedText || defaultChildren
@@ -42,7 +41,6 @@ export default function ItineraryLayout({ children }: ItineraryLayoutProps) {
             <span aria-hidden="true">▼</span>
           </Button>
 
-          {/* Dropdown list of all itinerary days */}
           <Popover className="bg-background min-w-(--trigger-width) rounded-xl border p-1 shadow-lg">
             <ListBox items={itineraryDays} className="outline-none">
               {(day) => (
