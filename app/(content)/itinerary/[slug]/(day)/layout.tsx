@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from 'react-aria-components';
 import { Page } from '@/src/common/components/layout';
+import { PageSection } from '@/src/common/components/layout/PageSection';
 import { itineraryDays } from '@/src/domains/itinerary';
 
 interface ItineraryLayoutProps {
@@ -22,8 +23,8 @@ export default function ItineraryLayout({ children }: ItineraryLayoutProps) {
   const router = useRouter();
 
   return (
-    <div className="flex h-full flex-col">
-      <div className="py-2">
+    <Page>
+      <PageSection>
         <Select
           aria-label="Itinerary Days"
           value={pathname}
@@ -57,10 +58,9 @@ export default function ItineraryLayout({ children }: ItineraryLayoutProps) {
             </ListBox>
           </Popover>
         </Select>
-      </div>
+      </PageSection>
 
-      {/* Page content */}
-      <Page>{children}</Page>
-    </div>
+      {children}
+    </Page>
   );
 }
